@@ -5,7 +5,7 @@ from app.websocket.utils import manager as ws_manager
 docs_router = APIRouter()
 
 
-@docs_router.websocket("/", "websocket.docs")
+@docs_router.websocket("/")
 async def websocket_endpoint(websocket: WebSocket, client_id: int):
     await ws_manager.connect(websocket)
     try:
