@@ -22,7 +22,8 @@ html = """
         <ul id='messages'>
         </ul>
         <script>
-            var client_id = Date.now()
+            let splitted = window.location.href.split("/")
+            let client_id = splitted[splitted.length - 1]
             document.querySelector("#ws-id").textContent = client_id;
             var ws = new WebSocket(`ws://localhost:8000/th-docs/${client_id}`);
             ws.onmessage = function(event) {
@@ -43,20 +44,21 @@ html = """
 </html>
 """
 
-@docs_router.get("/")
-async def get():
+@docs_router.get("/{doc_id}")
+async def get(doc_id: str):
     return HTMLResponse(html)
 
 
 
-@docs_router.websocket("/{client_id}")
-async def websocket_endpoint(websocket: WebSocket, client_id: int):
-    await ws_manager.connect(websocket)
+@docs_router.websocket("/{doc_id}")
+async def websocket_endpoint(websocket: WebSocket, doc_id: str):
+    doc_room_id = "room-{}".format(doc_id)
+    await ws_manager.connect(websocket, room_id=doc_room_id)
     try:
         while True:
             data = await websocket.receive_text()
             await ws_manager.send_personal_message(f"You wrote: {data}", websocket)
-            await ws_manager.broadcast(f"Client #{client_id} says: {data}")
+            await ws_manager.broadcast(f"Client #{doc_id} says: {data}", room_id=doc_room_id)
     except WebSocketDisconnect:
-        await ws_manager.disconnect(websocket)
-        await ws_manager.emit(f"Client #{client_id} left the chat", sender_socket=websocket)
+        await ws_manager.disconnect(websocket, room_id=doc_room_id)
+        await ws_manager.emit(f"Client #{doc_id} left the chat", sender_socket=websocket, room_id=doc_room_id)
