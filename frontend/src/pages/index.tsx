@@ -14,7 +14,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <SlateEditor />
+        <h1>Hello I am home page</h1>
       </main>
 
       <footer className={styles.footer}>
