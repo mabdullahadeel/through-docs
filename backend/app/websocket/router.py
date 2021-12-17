@@ -3,4 +3,4 @@ from .handlers import docs
 
 websocket_router = APIRouter()
 
-websocket_router.include_router(docs.docs_router, prefix="/docs")
+websocket_router.include_router(docs.docs_router, prefix="/th-docs")
