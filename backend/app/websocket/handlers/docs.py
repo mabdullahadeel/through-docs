@@ -2,6 +2,7 @@ from fastapi import APIRouter, WebSocket
 from starlette.responses import HTMLResponse
 from starlette.websockets import WebSocketDisconnect
 from app.websocket.utils.manager import manager as ws_manager
+from app.schemas.socket import SocketMessage
 
 docs_router = APIRouter()
 
@@ -56,9 +57,8 @@ async def websocket_endpoint(websocket: WebSocket, doc_id: str):
     await ws_manager.connect(websocket, room_id=doc_room_id)
     try:
         while True:
-            data = await websocket.receive_text()
-            await ws_manager.send_personal_message(f"You wrote: {data}", websocket)
-            await ws_manager.broadcast(f"Client #{doc_id} says: {data}", room_id=doc_room_id)
+            data: SocketMessage = await websocket.receive_json()
+            await ws_manager.broadcast(data, room_id=doc_room_id)
     except WebSocketDisconnect:
         await ws_manager.disconnect(websocket, room_id=doc_room_id)
         await ws_manager.emit(f"Client #{doc_id} left the chat", sender_socket=websocket, room_id=doc_room_id)

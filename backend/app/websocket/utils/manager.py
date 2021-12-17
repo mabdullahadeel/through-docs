@@ -1,11 +1,7 @@
-from typing import Any, Dict, List
+from typing import Dict, List
 from fastapi import WebSocket
-from pydantic import BaseModel
+from app.schemas.socket import SocketMessage
 
-class SocketMessage(BaseModel):
-  type: str
-  data: Any
-  
 ActiveConnectionType = Dict[str, List[WebSocket]]
 class DocsConnectionManger:
   def __init__(self):
