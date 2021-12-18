@@ -22,6 +22,7 @@ interface SocketPayload {
 export const useDocsSocket = ({ pathDocId, editor }: DocsSocket) => {
   const docSocket = useRef<WebSocket | null>(null);
   const [value, setValue] = useState<Descendant[]>(initialValue);
+  const isSocketChange = useRef<boolean>(false)
 
   useEffect(() => {
     if (!pathDocId) return
@@ -45,8 +46,9 @@ export const useDocsSocket = ({ pathDocId, editor }: DocsSocket) => {
   }, [pathDocId]);
 
   const handleLocalDocUpdate = (payload: any) => {
-    // setValue(payload);
     console.log('handleLocalDocUpdate', payload);
+    isSocketChange.current = true;
+    setValue(payload);
     // Transforms.insertNodes(editor, payload);
     // editor.deleteFragment();
   }
@@ -58,6 +60,7 @@ export const useDocsSocket = ({ pathDocId, editor }: DocsSocket) => {
   return {
     editorValue: value,
     handleDocChange,
-    setValue
+    setValue,
+    isSocketChange
   }
 }

@@ -36,6 +36,7 @@ const MarkdownShortcutsExample = () => {
   return (
     <Slate editor={editor} value={value} onChange={value => setValue(value)}>
       <Editable
+        style={{margin: '20px auto', maxWidth: '800px', padding: '2rem', border: '1px solid #ddd'}}
         renderElement={renderElement}
         placeholder="Write some markdown..."
         spellCheck
@@ -49,6 +50,7 @@ const withShortcuts = (editor: CustomEditor) => {
   const { deleteBackward, insertText } = editor
 
   editor.insertText = text => {
+    // called when user types a character
     const { selection } = editor
 
     if (text === ' ' && selection && Range.isCollapsed(selection)) {
@@ -85,7 +87,7 @@ const withShortcuts = (editor: CustomEditor) => {
               n.type === 'list-item',
           })
         }
-
+        
         return
       }
     }

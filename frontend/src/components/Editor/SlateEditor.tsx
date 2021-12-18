@@ -9,21 +9,25 @@ interface Props {}
 export const SlateEditor: React.FC<Props> = () => {
   const editor = useMemo(() => withReact(createEditor()), []);
   const { id } = useRouter().query;
-  const { editorValue, handleDocChange, setValue } = useDocsSocket({ pathDocId: id as string, editor });
+  const { editorValue, handleDocChange, isSocketChange } = useDocsSocket({ pathDocId: id as string, editor });
 
   return (
     <Slate 
       editor={editor}
       value={editorValue}
-      // onChange={newValue => handleDocChange(newValue)}
-      onChange={newValue => setValue(newValue)}
+      onChange={newValue => {
+        if (!isSocketChange) {
+          handleDocChange(newValue)
+        }
+      }}
+      // onChange={newValue => setValue(newValue)}
     >
       <Editable
         placeholder="Enter some rich text…"
         spellCheck
         autoFocus
         onKeyDown={(e: React.KeyboardEvent) => {
-          handleDocChange(editorValue)
+          isSocketChange.current = false
         }}
       />
     </Slate>
