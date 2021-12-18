@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { Descendant, Element, Operation } from 'slate';
+import { BaseEditor, Descendant, Element, Operation, Transforms } from 'slate';
+import { ReactEditor } from "slate-react";
 
 const initialValue: Element[] = [
   {
@@ -10,6 +11,7 @@ const initialValue: Element[] = [
 
 interface DocsSocket {
   pathDocId: string
+  editor: BaseEditor & ReactEditor
 }
 
 interface SocketPayload {
@@ -17,7 +19,7 @@ interface SocketPayload {
   payload: any
 }
 
-export const useDocsSocket = ({pathDocId}: DocsSocket) => {
+export const useDocsSocket = ({ pathDocId, editor }: DocsSocket) => {
   const docSocket = useRef<WebSocket | null>(null);
   const [value, setValue] = useState<Descendant[]>(initialValue);
 
@@ -43,7 +45,10 @@ export const useDocsSocket = ({pathDocId}: DocsSocket) => {
   }, [pathDocId]);
 
   const handleLocalDocUpdate = (payload: any) => {
-    setValue(payload);
+    // setValue(payload);
+    console.log('handleLocalDocUpdate', payload);
+    // Transforms.insertNodes(editor, payload);
+    // editor.deleteFragment();
   }
 
   const handleDocChange = (value: Descendant[]) => {
@@ -53,5 +58,6 @@ export const useDocsSocket = ({pathDocId}: DocsSocket) => {
   return {
     editorValue: value,
     handleDocChange,
+    setValue
   }
 }
