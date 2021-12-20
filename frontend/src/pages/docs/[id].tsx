@@ -5,8 +5,8 @@ import { SlateEditor } from '../../components/Editor/SlateEditor'
 interface DocsProps {}
 
 const DocsPage: React.FC<DocsProps> = () => {
-  // return <SlateEditor />
-  return <MarkDownEditor />
+  return <SlateEditor />
+  // return <MarkDownEditor />
 }
 
 export default DocsPage;

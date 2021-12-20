@@ -58,7 +58,7 @@ async def websocket_endpoint(websocket: WebSocket, doc_id: str):
     try:
         while True:
             data: SocketMessage = await websocket.receive_json()
-            await ws_manager.broadcast(data, room_id=doc_room_id)
+            await ws_manager.emit(data, room_id=doc_room_id, sender_socket=websocket)
     except WebSocketDisconnect:
         await ws_manager.disconnect(websocket, room_id=doc_room_id)
         await ws_manager.emit(f"Client #{doc_id} left the chat", sender_socket=websocket, room_id=doc_room_id)

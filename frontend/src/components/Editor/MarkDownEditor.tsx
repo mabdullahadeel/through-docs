@@ -55,9 +55,12 @@ const withShortcuts = (editor: CustomEditor) => {
 
     if (text === ' ' && selection && Range.isCollapsed(selection)) {
       const { anchor } = selection
+
+      // get the current node in which editing is being done
       const block = Editor.above(editor, {
         match: n => Editor.isBlock(editor, n),
       })
+
       const path = block ? block[1] : []
       const start = Editor.start(editor, path)
       const range = { anchor, focus: start }

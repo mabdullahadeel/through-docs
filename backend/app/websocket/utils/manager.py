@@ -34,7 +34,7 @@ class DocsConnectionManger:
     """
     if not self._is_rooom_connected(room_id): return
     for connection in self.active_connections[room_id]:
-      if connection == sender_socket: return
+      if connection == sender_socket: continue
       await connection.send_json(message)
   
   
