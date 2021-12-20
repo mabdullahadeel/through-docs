@@ -2,6 +2,7 @@ import { defaultsDeepToNodes, insertNodes, PlateEditor } from "@udecode/plate";
 import { useEffect, useRef } from "react";
 import { Descendant, Element, Transforms, Editor, Range } from 'slate';
 import { CustomElement } from "../types/editor";
+import { getEditingNode } from "../utils/SyncingEditor";
 
 interface DocsSocket {
   pathDocId: string
@@ -28,7 +29,7 @@ export const useDocsSocket = ({ pathDocId, editor }: DocsSocket) => {
 
     socket.onmessage = (event) => {
       const data:SocketPayload = JSON.parse(event.data);
-      if (data.type === 'doc-update') {
+      if (data.type === 'node-update') {
         handleLocalDocUpdate(data.payload);
       }
     };
@@ -45,32 +46,21 @@ export const useDocsSocket = ({ pathDocId, editor }: DocsSocket) => {
       focus: Editor.end(editor, []),
     })
     Transforms.delete(editor);
-    // Transforms.insertNodes(editor, payload.nodes);
     insertNodes(editor, payload.nodes);
   }
   
-  const handleDocChange = (value?: Descendant[]) => {
+  const handleDocChange = () => {
     if (isSocketChange.current) {     // prevent infinite loop of socket and local changes
       isSocketChange.current = false
       return
     }
-    const { selection } = editor;
-    
-    if (selection) {
-      const { anchor } = selection;
-      const block = Editor.above(editor, {
-        match: n => Editor.isBlock(editor, n),
-      })
-      const currentNodeValue = block ? block[0] : {type: 'p', id: Date.now() , children: []}
-      const path = block ? block[1] : []
-      const start = Editor.start(editor, path)
-      const range = { anchor, focus: start }
-      
+    const { node, range } = getEditingNode(editor)
+    if (node && range) {
       const payload = {
         range,
-        nodes: currentNodeValue,
+        nodes: node,
       }
-      docSocket.current?.send(JSON.stringify({ type: "doc-update", payload }));
+      docSocket.current?.send(JSON.stringify({ type: "node-update", payload }));
     }
   }
 
