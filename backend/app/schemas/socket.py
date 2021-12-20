@@ -3,5 +3,5 @@ from pydantic import BaseModel
 
 class SocketMessage(BaseModel):
   type: str
-  data: Any
+  payload: Any
   

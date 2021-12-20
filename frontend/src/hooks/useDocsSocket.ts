@@ -1,7 +1,6 @@
-import { defaultsDeepToNodes, insertNodes, PlateEditor } from "@udecode/plate";
+import { insertNodes, PlateEditor } from "@udecode/plate";
 import { useEffect, useRef } from "react";
 import { Descendant, Element, Transforms, Editor, Range } from 'slate';
-import { CustomElement } from "../types/editor";
 import { getEditingNode } from "../utils/SyncingEditor";
 
 interface DocsSocket {

@@ -7,50 +7,6 @@ from app.schemas.socket import SocketMessage
 docs_router = APIRouter()
 
 
-html = """
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Chat</title>
-    </head>
-    <body>
-        <h1>WebSocket Chat</h1>
-        <h2>Your ID: <span id="ws-id"></span></h2>
-        <form action="" onsubmit="sendMessage(event)">
-            <input type="text" id="messageText" autocomplete="off"/>
-            <button>Send</button>
-        </form>
-        <ul id='messages'>
-        </ul>
-        <script>
-            let splitted = window.location.href.split("/")
-            let client_id = splitted[splitted.length - 1]
-            document.querySelector("#ws-id").textContent = client_id;
-            var ws = new WebSocket(`ws://localhost:8000/th-docs/${client_id}`);
-            ws.onmessage = function(event) {
-                var messages = document.getElementById('messages')
-                var message = document.createElement('li')
-                var content = document.createTextNode(event.data)
-                message.appendChild(content)
-                messages.appendChild(message)
-            };
-            function sendMessage(event) {
-                var input = document.getElementById("messageText")
-                ws.send(input.value)
-                input.value = ''
-                event.preventDefault()
-            }
-        </script>
-    </body>
-</html>
-"""
-
-@docs_router.get("/{doc_id}")
-async def get(doc_id: str):
-    return HTMLResponse(html)
-
-
-
 @docs_router.websocket("/{doc_id}")
 async def websocket_endpoint(websocket: WebSocket, doc_id: str):
     doc_room_id = "room-{}".format(doc_id)
