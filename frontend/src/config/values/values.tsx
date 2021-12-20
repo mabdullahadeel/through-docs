@@ -569,6 +569,12 @@ const basicElements: any = (
   </fragment>
 )
 
+const defaultParagraph: any = (
+  <fragment>
+    <hh6p>Lets Go</hh6>
+  </fragment>
+)
+
 const list: any = (
   <fragment>
     <hh2>✍️ List</hh2>
@@ -891,4 +897,5 @@ export const VALUES: Record<string, any> = {
   softBreak,
   table,
   align,
+  defaultParagraph,
 }

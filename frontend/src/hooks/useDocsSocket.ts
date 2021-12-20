@@ -1,4 +1,4 @@
-import { PlateEditor } from "@udecode/plate";
+import { defaultsDeepToNodes, insertNodes, PlateEditor } from "@udecode/plate";
 import { useEffect, useRef } from "react";
 import { Descendant, Element, Transforms, Editor, Range } from 'slate';
 import { CustomElement } from "../types/editor";
@@ -45,7 +45,8 @@ export const useDocsSocket = ({ pathDocId, editor }: DocsSocket) => {
       focus: Editor.end(editor, []),
     })
     Transforms.delete(editor);
-    Transforms.insertNodes(editor, payload.nodes);
+    // Transforms.insertNodes(editor, payload.nodes);
+    insertNodes(editor, payload.nodes);
   }
   
   const handleDocChange = (value?: Descendant[]) => {

@@ -27,7 +27,8 @@ export const PlateEditor: React.FC<Props> = () => {
         editableProps={CONFIG.editableProps}
         // initialValue={VALUES.playground}
         plugins={plugins}
-        onChange={(_newValue) => {
+        onChange={(newValue) => {
+          console.log(newValue)
           handleDocChange()
         }}
       >
