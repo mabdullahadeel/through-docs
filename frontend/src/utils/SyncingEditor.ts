@@ -13,7 +13,7 @@ export const getEditingNode = (editor: PlateEditor) => {
       const currentNodeValue = block ? block[0] : {type: ELEMENT_PARAGRAPH, id: Date.now() , children: []}
       const path = block ? block[1] : []
       const start = Editor.start(editor, path)
-      const range = { anchor, focus: start }
+      const range = { anchor, focus: start || end }
       
       return {
         range,

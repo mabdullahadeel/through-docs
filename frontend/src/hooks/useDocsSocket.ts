@@ -1,5 +1,5 @@
-import { insertNodes, PlateEditor } from "@udecode/plate";
-import { useEffect, useRef } from "react";
+import { ELEMENT_H1, insertNodes, PlateEditor } from "@udecode/plate";
+import { useEffect, useRef, useState } from "react";
 import { Descendant, Element, Transforms, Editor, Range } from 'slate';
 import { getEditingNode } from "../utils/SyncingEditor";
 
@@ -13,12 +13,48 @@ interface SocketPayload {
   payload: any
 }
 
+const innintialValue = [
+  {
+    type: ELEMENT_H1,
+    align: "center",
+    id: Date.now(),
+    children: [
+      {text: "🙋‍♂️ Untitled Document"}
+    ]
+  }
+]
+
+const cached_initial_docs = [
+  {
+    "type": "h1",
+    "align": "center",
+    "id": 1640030725684,
+    "children": [
+      {"text": "🙋‍♂️ Untitled Document Cowboy"}
+    ]
+  }
+]
+
+
 export const useDocsSocket = ({ pathDocId, editor }: DocsSocket) => {
   const docSocket = useRef<WebSocket | null>(null);
-  const isSocketChange = useRef<boolean>(false)
+  const isSocketChange = useRef<boolean>(false);
+  const [initialValue, setInitialValue] = useState(cached_initial_docs)
+
+  // useEffect(() => {
+  //   if (pathDocId) {
+  //     // make api call to the backend using fetch
+  //     fetch(`http://localhost:8000/api/v1/d/docs/${pathDocId}`)
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       setInitialValue(data)
+  //     })
+  //     .catch(err => console.log(err));
+  //   }
+  // }, [pathDocId])
 
   useEffect(() => {
-    if (!pathDocId) return
+    if (!pathDocId || !initialValue) return
     const socket = new WebSocket(`ws://localhost:8000/th-docs/${pathDocId}`);
     docSocket.current = socket;
 
@@ -36,16 +72,12 @@ export const useDocsSocket = ({ pathDocId, editor }: DocsSocket) => {
     return () => {
       socket.close();
     };
-  }, [pathDocId]);
+  }, [pathDocId, initialValue]);
 
   const handleLocalDocUpdate = (payload: any) => {
     isSocketChange.current = true;
-    Transforms.select(editor, {
-      anchor: Editor.start(editor, []),
-      focus: Editor.end(editor, []),
-    })
-    Transforms.delete(editor);
-    insertNodes(editor, payload.nodes);
+    Transforms.select(editor, payload.range);
+    Editor.insertFragment(editor, [payload.nodes]);
   }
   
   const handleDocChange = () => {
@@ -66,5 +98,6 @@ export const useDocsSocket = ({ pathDocId, editor }: DocsSocket) => {
   return {
     handleDocChange,
     isSocketChange: isSocketChange.current,
+    initialValue,
   }
 }
