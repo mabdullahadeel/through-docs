@@ -55,9 +55,9 @@ export const CONFIG: {
   trailingBlock: Partial<PlatePlugin<{}, TrailingBlockPlugin>>
 } = {
   editableProps: {
-    spellCheck: false,
+    spellCheck: true,
     autoFocus: false,
-    placeholder: 'Start Typing',
+    placeholder: '',
     style: {
       padding: '30px',
       border: '1px solid #ccc',
@@ -192,10 +192,10 @@ export const CONFIG: {
       rules: autoformatRules,
     },
   },
-  mentionItems: MENTIONABLES,
+  mentionItems: {},
   forceLayout: {
     options: {
-      rules: [{ path: [0], strictType: ELEMENT_H1 }],
+      rules: [],
     },
   },
 }

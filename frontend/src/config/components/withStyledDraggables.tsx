@@ -20,7 +20,6 @@ import {
 } from '@udecode/plate'
 import Tippy from '@tippyjs/react'
 import { TippyProps } from '@tippyjs/react'
-// import 'twin.macro'
 
 const GrabberTooltipContent = () => (
   <div style={{ fontSize: 12 }}>
@@ -68,7 +67,7 @@ export const withStyledDraggables = (components: any) => {
       onRenderDragHandle: ({ className, styles }) => {
         return (
           <Tippy {...grabberTooltipProps}>
-            <button type="button" className={className} css={styles}>
+            <button type="button" className={className} >
               <DragIndicator
                 style={{
                   width: 18,

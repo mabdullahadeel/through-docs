@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { Descendant, Element, Transforms, Editor, Range } from 'slate';
 import { CustomElement } from "../types/editor";
 
@@ -23,7 +23,6 @@ interface SocketPayload {
 
 export const useDocsSocket = ({ pathDocId, editor }: DocsSocket) => {
   const docSocket = useRef<WebSocket | null>(null);
-  const [value, setValue] = useState<Descendant[]>(initialValue);
   const isSocketChange = useRef<boolean>(false)
 
   useEffect(() => {
@@ -39,7 +38,7 @@ export const useDocsSocket = ({ pathDocId, editor }: DocsSocket) => {
       const data:SocketPayload = JSON.parse(event.data);
       if (data.type === 'doc-update') {
         const { payload } = data;
-        console.log('payload', payload);
+        console.log('payload', payload.nodes.id);
         handleLocalDocUpdate(data.payload);
       }
     };
@@ -51,26 +50,20 @@ export const useDocsSocket = ({ pathDocId, editor }: DocsSocket) => {
 
   const handleLocalDocUpdate = (payload: any) => {
     isSocketChange.current = true;
-    
-    // Transforms.select(editor, payload.range);
-    // Transforms.delete(editor);
-    Transforms.insertText(editor, payload.nodes.children[0].text, {
-      // at: payload.range,
-    })
+    // make doc edits here
     isSocketChange.current = false
   }
 
   const handleDocChange = (value?: Descendant[]) => {
-    // if (isSocketChange.current) return
+    if (isSocketChange.current) return
     const { selection } = editor;
     
     if (selection) {
-      console.log("detecting changes selection")
       const { anchor } = selection;
       const block = Editor.above(editor, {
         match: n => Editor.isBlock(editor, n),
       })
-      const currentNodeValue = block ? block[0] : {type: 'paragraph', children: []}
+      const currentNodeValue = block ? block[0] : {type: 'p', id: Date.now() , children: []}
       const path = block ? block[1] : []
       const start = Editor.start(editor, path)
       const range = { anchor, focus: start }
@@ -84,9 +77,7 @@ export const useDocsSocket = ({ pathDocId, editor }: DocsSocket) => {
   }
 
   return {
-    editorValue: value,
     handleDocChange,
-    setValue,
     isSocketChange: isSocketChange.current,
   }
 }
