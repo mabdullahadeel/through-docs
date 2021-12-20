@@ -114,10 +114,10 @@ const forcedLayout: any = (
       arbitrary richtext content.
     </hp>
     <hp>
-      "Normalizing" is how you can ensure that your editor's content is always
+      {`"Normalizing" is how you can ensure that your editor's content is always
       of a certain shape. It's similar to "validating", except instead of just
       determining whether the content is valid or invalid, its job is to fix the
-      content to make it valid again.
+      content to make it valid again.`}
     </hp>
   </fragment>
 )
@@ -199,8 +199,8 @@ const autoformat: any = (
   <fragment>
     <hh1>🏃‍♀️ Autoformat</hh1>
     <hp>
-      The editor gives you full control over the logic you can add. For example,
-      it's fairly common to want to add markdown-like shortcuts to editors.
+      {`The editor gives you full control over the logic you can add. For example,
+      it's fairly common to want to add markdown-like shortcuts to editors.`}
     </hp>
     <hp>While typing, try these (mark rules):</hp>
     <hul>
@@ -237,7 +237,7 @@ const autoformat: any = (
       <hli>
         <hlic>
           We even support smart quotes, try typing{' '}
-          <htext code>"hello" 'world'</htext>.
+          <htext code>{`"hello" 'world'`}</htext>.
         </hlic>
       </hli>
     </hul>

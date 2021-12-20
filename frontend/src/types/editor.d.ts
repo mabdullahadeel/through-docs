@@ -104,10 +104,10 @@ export type EmptyText = {
 
 export type CustomEditor = BaseEditor & ReactEditor & HistoryEditor
 
-declare module 'slate' {
-  interface CustomTypes {
-    Editor: CustomEditor
-    Element: CustomElement
-    Text: CustomText | EmptyText
-  }
-}
+// declare module 'slate' {
+//   interface CustomTypes {
+//     Editor: CustomEditor
+//     Element: CustomElement
+//     Text: CustomText | EmptyText
+//   }
+// }

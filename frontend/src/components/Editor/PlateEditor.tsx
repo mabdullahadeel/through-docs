@@ -19,7 +19,7 @@ export const PlateEditor: React.FC<Props> = () => {
   const plateStore = usePlateStore();
   const currentEditor = usePlateEditorRef();
   const { id: qid } = useRouter().query;
-  // const { handleDocChange } = useDocsSocket({ pathDocId: qid as string, editor: currentEditor });
+  const { handleDocChange } = useDocsSocket({ pathDocId: qid as string, editor: currentEditor });
   return (
     <DndProvider backend={HTML5Backend}>
       <Plate
@@ -27,10 +27,8 @@ export const PlateEditor: React.FC<Props> = () => {
         editableProps={CONFIG.editableProps}
         // initialValue={VALUES.playground}
         plugins={plugins}
-        onChange={(newValue) => {
-          console.log(newValue);
-          console.log(plateStore.store.getState())
-          // handleDocChange()
+        onChange={(_newValue) => {
+          handleDocChange()
         }}
       >
         <HeadingToolbar>

@@ -1,19 +1,11 @@
+import { PlateEditor } from "@udecode/plate";
 import { useEffect, useRef } from "react";
 import { Descendant, Element, Transforms, Editor, Range } from 'slate';
 import { CustomElement } from "../types/editor";
 
-const initialValue: Element[] = [
-  {
-    type: 'paragraph',
-    children: [
-      { text: 'A line of text in a paragraph.' }
-    ],
-  }
-];
-
 interface DocsSocket {
   pathDocId: string
-  editor: Editor
+  editor:  PlateEditor
 } 
 
 interface SocketPayload {
@@ -37,8 +29,6 @@ export const useDocsSocket = ({ pathDocId, editor }: DocsSocket) => {
     socket.onmessage = (event) => {
       const data:SocketPayload = JSON.parse(event.data);
       if (data.type === 'doc-update') {
-        const { payload } = data;
-        console.log('payload', payload.nodes.id);
         handleLocalDocUpdate(data.payload);
       }
     };
@@ -50,12 +40,19 @@ export const useDocsSocket = ({ pathDocId, editor }: DocsSocket) => {
 
   const handleLocalDocUpdate = (payload: any) => {
     isSocketChange.current = true;
-    // make doc edits here
-    isSocketChange.current = false
+    Transforms.select(editor, {
+      anchor: Editor.start(editor, []),
+      focus: Editor.end(editor, []),
+    })
+    Transforms.delete(editor);
+    Transforms.insertNodes(editor, payload.nodes);
   }
-
+  
   const handleDocChange = (value?: Descendant[]) => {
-    if (isSocketChange.current) return
+    if (isSocketChange.current) {     // prevent infinite loop of socket and local changes
+      isSocketChange.current = false
+      return
+    }
     const { selection } = editor;
     
     if (selection) {
@@ -67,7 +64,7 @@ export const useDocsSocket = ({ pathDocId, editor }: DocsSocket) => {
       const path = block ? block[1] : []
       const start = Editor.start(editor, path)
       const range = { anchor, focus: start }
-
+      
       const payload = {
         range,
         nodes: currentNodeValue,
