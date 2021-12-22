@@ -17,7 +17,7 @@ export const createElement = (
     mark?: string
   } = {}
 ) => {
-  const leaf = { text }
+  const leaf: { [text: string]: boolean | string} = { text }
   if (mark) {
     leaf[mark] = true
   }

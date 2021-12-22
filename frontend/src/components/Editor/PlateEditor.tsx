@@ -30,7 +30,8 @@ export const PlateEditor: React.FC<Props> = () => {
         <Plate
           id={id}
           editableProps={CONFIG.editableProps}
-          initialValue={initialValue}
+          // initialValue={initialValue}
+          initialValue={VALUES.playground}
           plugins={plugins}
           onChange={(newValue) => {
             console.log(newValue)
