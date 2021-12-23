@@ -7,35 +7,23 @@ import { VALUES } from '../../config/values/values';
 import { MarkBallonToolbar, ToolbarButtons } from '../../config/components/Toolbars';
 import { usePlugins } from '../../hooks/usePlugins';
 import { MENTIONABLES } from '../../config/mentionables';
-import { usePlateStore } from '@udecode/plate'
-import { useDocsSocket } from '../../hooks/useDocsSocket';
-import { useRouter } from 'next/router';
 
 interface Props {}
 const id = "through-docs";
 
 export const PlateEditor: React.FC<Props> = () => {
   const { plugins } = usePlugins();
-  const plateStore = usePlateStore();
-  const currentEditor = usePlateEditorRef();
-  const { id: qid } = useRouter().query;
-  const { handleDocChange, initialValue } = useDocsSocket({ pathDocId: qid as string, editor: currentEditor });
 
   return (
-    !initialValue ?
-      <h1>Loading</h1>
-    :
     <>
       <DndProvider backend={HTML5Backend}>
         <Plate
           id={id}
           editableProps={CONFIG.editableProps}
-          // initialValue={initialValue}
           initialValue={VALUES.playground}
           plugins={plugins}
           onChange={(newValue) => {
             console.log(newValue)
-            handleDocChange()
           }}
         >
           <HeadingToolbar>

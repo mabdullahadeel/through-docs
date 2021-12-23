@@ -342,16 +342,16 @@ const pasteHtml: any = (
   <fragment>
     <hh1>🍪 Deserialize HTML</hh1>
     <hp>
-      By default, pasting content into a Slate editor will use the clipboard's{' '}
-      <htext code>'text/plain'</htext> data. That's okay for some use cases, but
+      By default, pasting content into a Slate editor will use the {`clipboard's`}{' '}
+      <htext code>{`'text/plain'`}</htext> data. {`That's`} okay for some use cases, but
       sometimes you want users to be able to paste in content and have it
       maintain its formatting. To do this, your editor needs to handle{' '}
-      <htext code>'text/html'</htext> data.
+      <htext code>{`'text/html'`}</htext> data.
     </hp>
     <hp>This is an example of doing exactly that!</hp>
     <hp>
       Try it out for yourself! Copy and paste some rendered HTML rich text
-      content (not the source code) from another site into this editor and it's
+      content (not the source code) from another site into this editor and {`it's`}
       formatting should be preserved.
     </hp>
   </fragment>
@@ -361,11 +361,11 @@ const pasteMd: any = (
   <fragment>
     <hh1>🍩 Deserialize Markdown</hh1>
     <hp>
-      By default, pasting content into a Slate editor will use the clipboard's{' '}
-      <htext code>'text/plain'</htext> data. That's okay for some use cases, but
+      {`By default, pasting content into a Slate editor will use the clipboard's`}{' '}
+      <htext code>{`'text/plain'`}</htext> data. {`That's`} okay for some use cases, but
       sometimes you want users to be able to paste in content and have it
       maintain its formatting. To do this, your editor needs to handle{' '}
-      <htext code>'text/html'</htext> data.
+      <htext code>{`'text/html'`}</htext> data.
     </hp>
     <hp>This is an example of doing exactly that!</hp>
     <hp>
@@ -569,12 +569,6 @@ const basicElements: any = (
   </fragment>
 )
 
-// const defaultParagraph: any = (
-//   <fragment>
-//     <hh6p>Lets Go</hh6>
-//   </fragment>
-// )
-
 const list: any = (
   <fragment>
     <hh2>✍️ List</hh2>
@@ -609,7 +603,7 @@ const list: any = (
     </hul>
     <hol>
       <hli>
-        <hlic>Numbered list'</hlic>
+        <hlic>Numbered list</hlic>
       </hli>
     </hol>
     <hp>
@@ -621,7 +615,7 @@ const list: any = (
     <htodoli>Criss-cross.</htodoli>
     <htodoli checked>Criss-cross.</htodoli>
     <htodoli>Cha cha real smooth…</htodoli>
-    <htodoli>Let's go to work!</htodoli>
+    <htodoli>{`Let's go to work!`}</htodoli>
     <hp>Try it out for yourself!</hp>
   </fragment>
 )
@@ -731,10 +725,10 @@ const table: any = (
     </hp>
     {createTable()}
     <hp>
-      This table is just a basic example of rendering a table, and it doesn't
+      {`This table is just a basic example of rendering a table, and it doesn't
       have fancy functionality. But you could augment it to add support for
       navigating with arrow keys, displaying table headers, adding column and
-      rows, or even formulas if you wanted to get really crazy!
+      rows, or even formulas if you wanted to get really crazy!`}
     </hp>
     {createSpanningTable()}
     <hp>
@@ -897,5 +891,4 @@ export const VALUES: Record<string, any> = {
   softBreak,
   table,
   align,
-  // defaultParagraph,
 }
