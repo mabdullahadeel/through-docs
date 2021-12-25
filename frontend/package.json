@@ -19,6 +19,7 @@
     "cross-env": "^7.0.3",
     "faker": "^5.5.3",
     "is-hotkey": "^0.2.0",
+    "is-url": "^1.2.4",
     "next": "12.0.7",
     "react": "^17.0.2",
     "react-dnd": "^14.0.4",
@@ -32,6 +33,7 @@
   },
   "devDependencies": {
     "@types/faker": "^5.5.9",
+    "@types/is-url": "^1.2.30",
     "@types/node": "17.0.0",
     "@types/react": "17.0.37",
     "@types/slate": "^0.47.9",
