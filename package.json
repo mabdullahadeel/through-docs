@@ -1,5 +1,5 @@
 {
-  "dependencies": {
-    "automerge": "^1.0.1-preview.6"
-  }
+  "name": "th-docs",
+  "private": true,
+  "workspaces": ["frontend", "th-socket-client"]
 }

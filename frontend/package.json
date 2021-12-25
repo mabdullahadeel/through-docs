@@ -8,6 +8,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "th-collaboration/th-socket-client": "workspace:../th-socket-client",
     "@styled-icons/boxicons-regular": "^10.38.0",
     "@styled-icons/foundation": "^10.34.0",
     "@styled-icons/material": "^10.34.0",
