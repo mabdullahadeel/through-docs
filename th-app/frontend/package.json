@@ -26,8 +26,7 @@
     "slate-history": "^0.66.0",
     "slate-hyperscript": "^0.67.0",
     "slate-react": "^0.72.1",
-    "styled-components": "^5.3.3",
-    "twin.macro": "^2.6.2"
+    "styled-components": "^5.3.3"
   },
   "devDependencies": {
     "@types/faker": "^5.5.9",
