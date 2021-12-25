@@ -1,22 +1,22 @@
 import React, { useMemo } from "react";
 import { createEditor, Descendant, Element } from 'slate'
-import { Editable, Slate, withReact } from "slate-react";
+import { Editable, ReactEditor, Slate, withReact } from "slate-react";
 import { useDocsSocket } from "../../hooks/useDocsSocket";
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
+
 
 interface Props {}
 
 export const SlateEditor: React.FC<Props> = () => {
-  const editor = useMemo(() => withReact(createEditor()), []);
+  const editor = useMemo(() => withReact(createEditor() as any), []);
   const { id } = useRouter().query;
-  const { editorValue, handleDocChange, setValue, isSocketChange } = useDocsSocket({ pathDocId: id as string, editor });
+  const { handleDocChange, isSocketChange } = useDocsSocket({ pathDocId: id as string, editor });
 
   return (
     <Slate 
       editor={editor}
-      value={editorValue}
+      value={[{children:[]}]}
       onChange={newValue => {
-        setValue(newValue);
         // if (!isSocketChange) {
         //   console.log('socket change');
         //   // handleDocChange(newValue)

@@ -15,7 +15,6 @@ export const PlateEditor: React.FC<Props> = () => {
   const { plugins } = usePlugins();
 
   return (
-    <>
       <DndProvider backend={HTML5Backend}>
         <Plate
           id={id}
@@ -35,6 +34,5 @@ export const PlateEditor: React.FC<Props> = () => {
           <MentionCombobox items={MENTIONABLES} />
         </Plate>
       </DndProvider>
-    </>
   )
 }

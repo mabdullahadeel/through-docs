@@ -1,6 +1,6 @@
-import { ELEMENT_H1, insertNodes, PlateEditor } from "@udecode/plate";
+import { ELEMENT_H1, PlateEditor } from "@udecode/plate";
 import { useEffect, useRef, useState } from "react";
-import { Descendant, Element, Transforms, Editor, Range } from 'slate';
+import { Transforms, Editor } from 'slate';
 import { getEditingNode } from "../utils/SyncingEditor";
 
 interface DocsSocket {

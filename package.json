@@ -1,5 +1,8 @@
 {
-  "name": "th-docs",
+  "name": "through-docs",
   "private": true,
-  "workspaces": ["frontend", "th-socket-client"]
+  "workspaces": [
+    "frontend",
+    "th-socket-client"
+  ]
 }

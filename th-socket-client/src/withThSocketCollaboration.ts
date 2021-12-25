@@ -8,9 +8,7 @@ import withWebSocketSlateEditor, {
 } from './withSocket';
 
 
-const withSocketCollaboration = <T extends Editor>(
+export const withSocketCollaboration = <T extends Editor>(
   editor: T,
   options: AutomergeOptions & ThSlateSocketPluginOptions,
 ): T & WithWebSocketSlateEditor & AutomergeEditor  => withWebSocketSlateEditor(withThAutomerge(editor, options), options);
-
-export default withSocketCollaboration;
