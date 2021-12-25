@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "automerge": "^1.0.1-preview.6"
+  }
+}
