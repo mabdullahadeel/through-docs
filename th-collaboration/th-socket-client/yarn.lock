@@ -2,6 +2,30 @@
 # yarn lockfile v1
 
 
+"@slate-collaborative/bridge@^0.7.2":
+  version "0.7.2"
+  resolved "https://registry.yarnpkg.com/@slate-collaborative/bridge/-/bridge-0.7.2.tgz#bcfbf1236a9680b9b3eab87e3d8694dfc3b4b702"
+  integrity sha512-/caoytTpJH23EfgLTvPveHuRoMU50xeptKuGzPwfcQAn26pNMdOSFnmEEMv8uWWyGUiP/NbFQyoHYulajlNx4A==
+  dependencies:
+    automerge "0.14.0"
+    slate "0.59.0"
+    typescript "^3.8.3"
+
+"@types/esrever@^0.2.0":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@types/esrever/-/esrever-0.2.1.tgz#9ff5155ef412848270ead4aaa611a8cdadcb9ab0"
+  integrity sha512-vRLFhQxGVkyUF7opxv66MQHoRSOBkbbitj1OGd6My4XR6HwCorUZxSiJejF3s4OxmEFTjfRRGwm6GUhuQETP6Q==
+
+automerge@0.14.0:
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/automerge/-/automerge-0.14.0.tgz#cdee150385415812eb39d58a25bd9b74a46e0a8b"
+  integrity sha512-H0Lszio1ZywPpJ3bS8IZ8qGkmFYN/cLPXT30AD1gDz7LMd6NEhdbOA+uBLr97a4M4f3Xx0KtOAJrQ7Xjo4OCOQ==
+  dependencies:
+    immutable "^3.8.2"
+    transit-immutable-js "^0.7.0"
+    transit-js "^0.8.861"
+    uuid "^3.4.0"
+
 automerge@^1.0.1-preview.6:
   version "1.0.1-preview.6"
   resolved "https://registry.yarnpkg.com/automerge/-/automerge-1.0.1-preview.6.tgz#00a3e73c9cd644e30619ee973badbf0f78bea79c"
@@ -11,25 +35,88 @@ automerge@^1.0.1-preview.6:
     pako "^2.0.3"
     uuid "^3.4.0"
 
+esrever@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/esrever/-/esrever-0.2.0.tgz#96e9d28f4f1b1a76784cd5d490eaae010e7407b8"
+  integrity sha1-lunSj08bGnZ4TNXUkOquAQ50B7g=
+
 fast-sha256@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/fast-sha256/-/fast-sha256-1.3.0.tgz#7916ba2054eeb255982608cccd0f6660c79b7ae6"
   integrity sha512-n11RGP/lrWEFI/bWdygLxhI+pVeo1ZYIVwvvPkW7azl/rOy+F3HYRZ2K5zeE9mmkhQppyv9sQFx0JM9UabnpPQ==
+
+immer@^5.0.0:
+  version "5.3.6"
+  resolved "https://registry.yarnpkg.com/immer/-/immer-5.3.6.tgz#51eab8cbbeb13075fe2244250f221598818cac04"
+  integrity sha512-pqWQ6ozVfNOUDjrLfm4Pt7q4Q12cGw2HUZgry4Q5+Myxu9nmHRkWBpI0J4+MK0AxbdFtdMTwEGVl7Vd+vEiK+A==
 
 immer@^9.0.6:
   version "9.0.7"
   resolved "https://registry.yarnpkg.com/immer/-/immer-9.0.7.tgz#b6156bd7db55db7abc73fd2fdadf4e579a701075"
   integrity sha512-KGllzpbamZDvOIxnmJ0jI840g7Oikx58lBPWV0hUh7dtAyZpFqqrBZdKka5GlTwMTZ1Tjc/bKKW4VSFAt6BqMA==
 
+immutable@^3.8.2:
+  version "3.8.2"
+  resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.8.2.tgz#c2439951455bb39913daf281376f1530e104adf3"
+  integrity sha1-wkOZUUVbs5kT2vKBN28VMOEErfM=
+
+is-plain-object@^3.0.0:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/is-plain-object/-/is-plain-object-3.0.1.tgz#662d92d24c0aa4302407b0d45d21f2251c85f85b"
+  integrity sha512-Xnpx182SBMrr/aBik8y+GuR4U1L9FqMSojwDQwPMmxyC6bvEqly9UBCxhauBF5vNh2gwWJNX6oDV7O+OM4z34g==
+
 is-plain-object@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/is-plain-object/-/is-plain-object-5.0.0.tgz#4427f50ab3429e9025ea7d52e9043a9ef4159344"
   integrity sha512-VRSzKkbMm5jMDoKLbltAkFQ5Qr7VDiTFGXxYFXXowVj387GeGNOCsOH6Msy00SGZ3Fp84b1Naa1psqgcCIEP5Q==
 
+"js-tokens@^3.0.0 || ^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
+  integrity sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==
+
+loose-envify@^1.1.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/loose-envify/-/loose-envify-1.4.0.tgz#71ee51fa7be4caec1a63839f7e682d8132d30caf"
+  integrity sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==
+  dependencies:
+    js-tokens "^3.0.0 || ^4.0.0"
+
+object-assign@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
+  integrity sha1-IQmtx5ZYh8/AXLvUQsrIv7s2CGM=
+
 pako@^2.0.3:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/pako/-/pako-2.0.4.tgz#6cebc4bbb0b6c73b0d5b8d7e8476e2b2fbea576d"
   integrity sha512-v8tweI900AUkZN6heMU/4Uy4cXRc2AYNRggVmTR+dEncawDJgCdLMximOVA2p4qO57WMynangsfGRb5WD6L1Bg==
+
+react@^17.0.2:
+  version "17.0.2"
+  resolved "https://registry.yarnpkg.com/react/-/react-17.0.2.tgz#d0b5cc516d29eb3eee383f75b62864cfb6800037"
+  integrity sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+
+slate-history@^0.66.0:
+  version "0.66.0"
+  resolved "https://registry.yarnpkg.com/slate-history/-/slate-history-0.66.0.tgz#ac63fddb903098ceb4c944433e3f75fe63acf940"
+  integrity sha512-6MWpxGQZiMvSINlCbMW43E2YBSVMCMCIwQfBzGssjWw4kb0qfvj0pIdblWNRQZD0hR6WHP+dHHgGSeVdMWzfng==
+  dependencies:
+    is-plain-object "^5.0.0"
+
+slate@0.59.0:
+  version "0.59.0"
+  resolved "https://registry.yarnpkg.com/slate/-/slate-0.59.0.tgz#3169daf2f036e84aa149f60e0d12ef2fc4c0839e"
+  integrity sha512-M4UTMkXExxuq8tCD+knn7BtV2pmY8pepay++EF59rmg/v4RB6X1gNzA0xP3aw2rqYl8TmWdOBdy9InFrm3WyXw==
+  dependencies:
+    "@types/esrever" "^0.2.0"
+    esrever "^0.2.0"
+    immer "^5.0.0"
+    is-plain-object "^3.0.0"
+    tiny-warning "^1.0.3"
 
 slate@^0.72.3:
   version "0.72.3"
@@ -44,6 +131,21 @@ tiny-warning@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/tiny-warning/-/tiny-warning-1.0.3.tgz#94a30db453df4c643d0fd566060d60a875d84754"
   integrity sha512-lBN9zLN/oAf68o3zNXYrdCt1kP8WsiGW8Oo2ka41b2IM5JL/S1CTyX1rW0mb/zSuJun0ZUrDxx4sqvYS2FWzPA==
+
+transit-immutable-js@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/transit-immutable-js/-/transit-immutable-js-0.7.0.tgz#993e25089b6311ff402140f556276d6d253005d9"
+  integrity sha1-mT4lCJtjEf9AIUD1VidtbSUwBdk=
+
+transit-js@^0.8.861:
+  version "0.8.874"
+  resolved "https://registry.yarnpkg.com/transit-js/-/transit-js-0.8.874.tgz#37b27d6632bd796567c359220297c862e3988bbb"
+  integrity sha512-IDJJGKRzUbJHmN0P15HBBa05nbKor3r2MmG6aSt0UxXIlJZZKcddTk67/U7WyAeW9Hv/VYI02IqLzolsC4sbPA==
+
+typescript@^3.8.3:
+  version "3.9.10"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.10.tgz#70f3910ac7a51ed6bef79da7800690b19bf778b8"
+  integrity sha512-w6fIxVE/H1PkLKcCPsFqKE7Kv7QUwhU8qQY2MueZXWx5cPZdwFupLgKK3vntcK98BtNHZtAF4LA/yl2a7k8R6Q==
 
 uuid@^3.4.0:
   version "3.4.0"
