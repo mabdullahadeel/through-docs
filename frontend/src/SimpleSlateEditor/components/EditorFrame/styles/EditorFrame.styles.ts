@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 import { Button } from '../../Room/styles/Room.styles';
 
-
-
 export const Icon = styled.div``;
 
 export const ClientFrame = styled.div`
@@ -27,10 +25,12 @@ export const ClientFrame = styled.div`
   a:visited {
     color: darkmagenta;
   }
-`
+`;
 
-export const IconButton = styled(Button)((props: any) => ({
-  color: props.active ? 'mediumvioletred' : 'lightpink',
-  border: 'none',
-  padding: 0
-}))
+export const IconButton = styled(Button)(
+  (props: { active: boolean; onMouseDown: (event: MouseEvent) => void }) => ({
+    color: props.active ? 'mediumvioletred' : 'lightpink',
+    border: 'none',
+    padding: 0,
+  })
+);
