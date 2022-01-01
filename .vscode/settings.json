@@ -1,8 +1,12 @@
 {
   "python.pythonPath": "backend\\env\\Scripts\\python.exe",
-  "editor.formatOnSave": false,
   "editor.tabSize": 2,
   "[python]": {
     "editor.formatOnSave": true
   },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
 }
