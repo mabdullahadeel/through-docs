@@ -6,6 +6,10 @@ import { toJS, Cursor, Cursors } from '@slate-collaborative/bridge'
 
 import { AutomergeEditor } from './automerge-editor'
 
+export interface CursorRange extends Range {
+  isCaret: boolean
+}
+
 const useCursor = (
   e: AutomergeEditor
 ): { decorate: (entry: NodeEntry) => Range[]; cursors: Cursor[] } => {
@@ -31,7 +35,7 @@ const useCursor = (
 
   const decorate = useCallback(
     ([node, path]: NodeEntry) => {
-      const ranges: Range[] = []
+      const ranges: CursorRange[] = []
 
       if (Text.isText(node) && cursors?.length) {
         cursors.forEach(cursor => {

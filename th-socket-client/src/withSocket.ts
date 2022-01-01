@@ -41,7 +41,7 @@ const withWebSocketSlateEditor = <T extends AutomergeEditor>(
 
   editor.connect = () => {
     if (!editor.socket) {
-      editor.socket = new WebSocket(options.url);
+      editor.socket = new WebSocket(url);
 
       editor.socket.onopen = () => {
         /**
