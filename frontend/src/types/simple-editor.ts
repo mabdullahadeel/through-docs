@@ -2,7 +2,7 @@ import { BaseEditor, Descendant } from 'slate';
 import { HistoryEditor } from 'slate-history';
 import { ReactEditor, RenderLeafProps } from 'slate-react';
 
-export interface ParagraphElement extends Node {
+export interface ParagraphElement {
   type: 'paragraph';
   children: Descendant[];
 }
