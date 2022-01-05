@@ -1,8 +1,11 @@
 {
   "name": "@through-docs/th-socket-client",
   "version": "1.0.0",
-  "main": "dist/th-socket-client/index.js",
-  "typings": "dist/th-socket-client/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "license": "MIT",
   "scripts": {
     "build": "rm -rf dist && tsc",

@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import {
   SimpleSlateEditor,
   SimpleSlateElement,
@@ -9,9 +9,8 @@ import { withHistory } from 'slate-history';
 import { withReact } from 'slate-react';
 import { withLinks } from '../../plugins/link';
 import { useDocPage } from '../../../hooks/useDocPage';
-import { useEffect } from 'react';
-import { withSocketCollaboration } from '@through-docs/th-socket-client/dist/th-socket-client';
-import useCursor from '@through-docs/th-socket-client/dist/th-socket-client/src/useCursor';
+import { withSocketCollaboration } from '@through-docs/th-socket-client';
+import { useCursor } from '@through-docs/th-socket-client';
 import { Instance } from '../Room/styles/Room.styles';
 import EditorFrame from '../EditorFrame/EditorFrame';
 

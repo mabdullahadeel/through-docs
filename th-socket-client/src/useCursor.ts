@@ -1,49 +1,49 @@
-import { useState, useCallback, useEffect, useMemo } from 'react'
+import { useState, useCallback, useEffect, useMemo } from "react";
 
-import { Text, Range, Path, NodeEntry } from 'slate'
+import { Text, Range, Path, NodeEntry } from "slate";
 
-import { toJS, Cursor, Cursors } from '@slate-collaborative/bridge'
+import { toJS, Cursor, Cursors } from "@slate-collaborative/bridge";
 
-import { AutomergeEditor } from './automerge-editor'
+import { AutomergeEditor } from "./automerge-editor";
 
 export interface CursorRange extends Range {
-  isCaret: boolean
+  isCaret: boolean;
 }
 
-const useCursor = (
+export const useCursor = (
   e: AutomergeEditor
 ): { decorate: (entry: NodeEntry) => Range[]; cursors: Cursor[] } => {
-  const [cursorData, setSursorData] = useState<Cursor[]>([])
+  const [cursorData, setSursorData] = useState<Cursor[]>([]);
 
   useEffect(() => {
     e.onCursor = (data: Cursors) => {
-      const ranges: Cursor[] = []
+      const ranges: Cursor[] = [];
 
-      const cursors = toJS(data)
+      const cursors = toJS(data);
 
       for (let cursor in cursors) {
         if (cursor !== e.clientId && cursors[cursor]) {
-          ranges.push(JSON.parse(cursors[cursor]))
+          ranges.push(JSON.parse(cursors[cursor]));
         }
       }
 
-      setSursorData(ranges)
-    }
-  }, [])
+      setSursorData(ranges);
+    };
+  }, []);
 
-  const cursors = useMemo<Cursor[]>(() => cursorData, [cursorData])
+  const cursors = useMemo<Cursor[]>(() => cursorData, [cursorData]);
 
   const decorate = useCallback(
     ([node, path]: NodeEntry) => {
-      const ranges: CursorRange[] = []
+      const ranges: CursorRange[] = [];
 
       if (Text.isText(node) && cursors?.length) {
-        cursors.forEach(cursor => {
+        cursors.forEach((cursor) => {
           if (Range.includes(cursor, path)) {
-            const { focus, anchor, isForward } = cursor
+            const { focus, anchor, isForward } = cursor;
 
-            const isFocusNode = Path.equals(focus.path, path)
-            const isAnchorNode = Path.equals(anchor.path, path)
+            const isFocusNode = Path.equals(focus.path, path);
+            const isAnchorNode = Path.equals(anchor.path, path);
 
             ranges.push({
               ...cursor,
@@ -54,7 +54,7 @@ const useCursor = (
                   ? anchor.offset
                   : isForward
                   ? 0
-                  : node.text.length
+                  : node.text.length,
               },
               focus: {
                 path,
@@ -62,22 +62,20 @@ const useCursor = (
                   ? focus.offset
                   : isForward
                   ? node.text.length
-                  : 0
-              }
-            })
+                  : 0,
+              },
+            });
           }
-        })
+        });
       }
 
-      return ranges
+      return ranges;
     },
     [cursors]
-  )
+  );
 
   return {
     cursors,
-    decorate
-  }
-}
-
-export default useCursor
+    decorate,
+  };
+};
