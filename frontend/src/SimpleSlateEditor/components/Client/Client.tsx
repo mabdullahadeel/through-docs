@@ -9,7 +9,11 @@ import { withHistory } from 'slate-history';
 import { withReact } from 'slate-react';
 import { withLinks } from '../../plugins/link';
 import { useDocPage } from '../../../hooks/useDocPage';
-import { withSocketCollaboration } from '@through-docs/th-socket-client';
+import { useEffect } from 'react';
+import { withSocketCollaboration } from '@through-docs/th-socket-client/dist/th-socket-client';
+import useCursor from '@through-docs/th-socket-client/dist/th-socket-client/src/useCursor';
+import { Instance } from '../Room/styles/Room.styles';
+import EditorFrame from '../EditorFrame/EditorFrame';
 
 const defaultValue: SimpleSlateElement[] = [
   {
@@ -73,7 +77,32 @@ const Client: React.FC<ClientProps> = ({ id, name }) => {
       onDisconnect: () => setIsEditorOnline(false),
       autoConnect: false,
     };
-
     return withSocketCollaboration(slateEditor, options);
   }, []);
+
+  useEffect(() => {
+    editor.connect();
+
+    return editor.destroy;
+  }, []);
+
+  const { decorate } = useCursor(editor);
+
+  const toggleOnline = () => {
+    const { connect, disconnect } = editor;
+    isEditorOnline ? disconnect() : connect();
+  };
+
+  return (
+    <Instance online={isEditorOnline}>
+      <EditorFrame
+        editor={editor}
+        value={editorValue}
+        decorate={decorate}
+        onChange={(value) => setEditorValue(value as SimpleSlateElement[])}
+      />
+    </Instance>
+  );
 };
+
+export default Client;

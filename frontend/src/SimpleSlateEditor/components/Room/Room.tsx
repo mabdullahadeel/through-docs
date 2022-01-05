@@ -2,14 +2,8 @@ import React, { useState } from 'react';
 import faker from 'faker';
 import { User } from '../../../types/th-doc';
 import debounce from 'lodash/debounce';
-import {
-  RoomWrapper,
-  H4,
-  Title,
-  Button,
-  Grid,
-  Input,
-} from './styles/Room.styles';
+import { RoomWrapper } from './styles/Room.styles';
+import Client from '../Client/Client';
 
 interface RoomProps {}
 
@@ -31,13 +25,7 @@ const Room: React.FC<RoomProps> = () => {
 
   return (
     <RoomWrapper>
-      {isRemounted ? null : (
-        // <Client
-        //   {...user}
-        //   key={user.id}
-        // />
-        <H4>Client</H4>
-      )}
+      {isRemounted ? null : <Client {...user} key={user.id} />}
     </RoomWrapper>
   );
 };

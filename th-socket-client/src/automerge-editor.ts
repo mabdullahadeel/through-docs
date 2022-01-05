@@ -1,4 +1,4 @@
-import Automerge from "automerge";
+import * as Automerge from "automerge";
 
 import { Editor, Operation } from "slate";
 import { HistoryEditor } from "slate-history";
@@ -67,7 +67,7 @@ export const AutomergeEditor = {
       let changed;
 
       for await (let op of operations) {
-        changed = Automerge.change<SyncDoc>(changed || doc, (d) =>
+        changed = Automerge.change<SyncDoc>(changed || doc, (d: any) =>
           applyOperation(d.children, op as any)
         );
       }

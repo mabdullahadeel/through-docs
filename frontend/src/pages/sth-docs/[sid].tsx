@@ -1,10 +1,10 @@
 import React from 'react';
-import { PlateEditor } from '../../components/Editor/PlateEditor';
+import { SimpleSlateEditor } from '../../SimpleSlateEditor/SimpleSlateEditor';
 
 interface DocsProps {}
 
 const SimpleDocsPage: React.FC<DocsProps> = () => {
-  return <PlateEditor />;
+  return <SimpleSlateEditor />;
 };
 
 export default SimpleDocsPage;

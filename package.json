@@ -4,5 +4,7 @@
   "workspaces": [
     "frontend",
     "th-socket-client"
-  ]
+  ],
+  "npmClient": "yarn",
+  "useWorspaces": true
 }
