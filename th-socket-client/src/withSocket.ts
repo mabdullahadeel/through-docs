@@ -1,43 +1,32 @@
-import { AutomergeEditor } from './automerge-editor';
-import { CollabAction } from '@slate-collaborative/bridge';
-
+import { AutomergeEditor } from "./automerge-editor";
+import { CollabAction } from "@slate-collaborative/bridge";
 
 export interface ThSlateSocketPluginOptions {
-  url: string,
-  autoConnect: boolean,
+  url: string;
+  autoConnect: boolean;
 
-  onConnect?: () => void,
-  onDisconnect?: () => void,
-  onError?: (msg: string) => void,
+  onConnect?: () => void;
+  onDisconnect?: () => void;
+  onError?: (msg: string) => void;
 }
-
 
 export interface WithWebSocketSlateEditor {
-  socket: WebSocket | null,
+  socket: WebSocket | null;
 
-  connect: () => void
-  disconnect: () => void
+  connect: () => void;
+  disconnect: () => void;
 
-  send: (op: CollabAction) => void
-  receive: (op: CollabAction) => void
+  send: (op: CollabAction) => void;
+  receive: (op: CollabAction) => void;
 
-  destroy: () => void
+  destroy: () => void;
 }
-
 
 const withWebSocketSlateEditor = <T extends AutomergeEditor>(
   editor: T & WithWebSocketSlateEditor,
   options: ThSlateSocketPluginOptions
 ) => {
-
-  const {
-    onConnect,
-    onDisconnect,
-    onError,
-    url,
-    autoConnect
-  } = options
-
+  const { onConnect, onDisconnect, onError, url, autoConnect } = options;
 
   editor.connect = () => {
     if (!editor.socket) {
@@ -47,36 +36,36 @@ const withWebSocketSlateEditor = <T extends AutomergeEditor>(
         /**
          * @todo : set the `editor.clientId` to some proper uid value
          */
-        editor.clientId = editor.socket.url;
-        
+        editor.clientId = editor.socket?.url || Date.now().toString();
+
         onConnect && onConnect();
-      }
-    };
+      };
+    }
 
     editor.socket.onmessage = (event) => {
       editor.receive(JSON.parse(event.data));
     };
 
     editor.socket.onerror = (_event) => {
-      onError && onError('Socket error');
+      onError && onError("Socket error");
     };
 
     editor.socket.onclose = (_event) => {
       editor.gabageCursor();
       onDisconnect && onDisconnect();
-    }
+    };
 
     return editor;
-  }
+  };
 
   /**
    * Disconnect from Socket.
    */
 
   editor.disconnect = () => {
-    editor.socket.close()
+    editor.socket?.close();
 
-    editor.closeConnection()
+    editor.closeConnection();
 
     return editor;
   };
@@ -87,10 +76,10 @@ const withWebSocketSlateEditor = <T extends AutomergeEditor>(
 
   editor.receive = (msg: CollabAction) => {
     switch (msg.type) {
-      case 'operation':
-        return editor.receiveOperation(msg.payload)
-      case 'document':
-        return editor.receiveDocument(msg.payload)
+      case "operation":
+        return editor.receiveOperation(msg.payload);
+      case "document":
+        return editor.receiveDocument(msg.payload);
     }
   };
 
@@ -99,7 +88,7 @@ const withWebSocketSlateEditor = <T extends AutomergeEditor>(
    */
 
   editor.send = (payload: CollabAction) => {
-    editor.socket.send(JSON.stringify(payload));
+    editor.socket?.send(JSON.stringify(payload));
   };
 
   /**
@@ -107,15 +96,14 @@ const withWebSocketSlateEditor = <T extends AutomergeEditor>(
    */
 
   editor.destroy = () => {
-    editor.socket.close();
+    editor.socket?.close();
 
     editor.closeConnection();
-  }
+  };
 
   autoConnect && editor.connect();
 
   return editor;
-
 };
 
 export default withWebSocketSlateEditor;
