@@ -9,8 +9,10 @@ import { withHistory } from 'slate-history';
 import { withReact } from 'slate-react';
 import { withLinks } from '../../plugins/link';
 import { useDocPage } from '../../../hooks/useDocPage';
-import { withSocketCollaboration } from '@through-docs/th-socket-client';
-import { useCursor } from '@through-docs/th-socket-client';
+import {
+  withSocketCollaboration,
+  useCursor,
+} from '@through-docs/th-socket-client';
 import { Instance } from '../Room/styles/Room.styles';
 import EditorFrame from '../EditorFrame/EditorFrame';
 
