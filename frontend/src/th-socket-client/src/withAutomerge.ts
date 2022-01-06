@@ -1,4 +1,4 @@
-import * as Automerge from 'automerge';
+import Automerge from 'automerge';
 
 import { Editor } from 'slate';
 
@@ -46,25 +46,19 @@ const withAutomerge = <T extends Editor>(
    * Open Automerge Connection
    */
 
-  e.openConnection = () => {
-    e.connection.open();
-  };
+  e.openConnection = () => e.connection.open();
 
   /**
    * Close Automerge Connection
    */
 
-  e.closeConnection = () => {
-    e.connection.close();
-  };
+  e.closeConnection = () => e.connection.close();
 
   /**
    * Clear cursor data
    */
 
-  e.gabageCursor = () => {
-    AutomergeEditor.garbageCursor(e, docId);
-  };
+  e.gabageCursor = () => AutomergeEditor.garbageCursor(e, docId);
 
   /**
    * Editor onChange

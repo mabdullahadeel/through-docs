@@ -16,7 +16,7 @@
     "@udecode/plate": "^9.1.0",
     "@udecode/plate-test-utils": "^3.2.0",
     "@udecode/plate-ui-excalidraw": "^9.0.0",
-    "automerge": "^1.0.1-preview.6",
+    "automerge": "0.14.0",
     "cross-env": "^7.0.3",
     "faker": "^5.5.3",
     "is-hotkey": "^0.2.0",
