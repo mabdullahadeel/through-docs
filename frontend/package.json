@@ -8,14 +8,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@slate-collaborative/bridge": "^0.7.2",
     "@styled-icons/boxicons-regular": "^10.38.0",
     "@styled-icons/foundation": "^10.34.0",
     "@styled-icons/material": "^10.34.0",
-    "@through-docs/th-socket-client": "1.0.0",
     "@tippyjs/react": "^4.2.6",
     "@udecode/plate": "^9.1.0",
     "@udecode/plate-test-utils": "^3.2.0",
     "@udecode/plate-ui-excalidraw": "^9.0.0",
+    "automerge": "^1.0.1-preview.6",
     "cross-env": "^7.0.3",
     "faker": "^5.5.3",
     "is-hotkey": "^0.2.0",

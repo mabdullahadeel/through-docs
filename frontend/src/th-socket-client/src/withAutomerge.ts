@@ -1,11 +1,11 @@
-import * as Automerge from "automerge";
+import * as Automerge from 'automerge';
 
-import { Editor } from "slate";
+import { Editor } from 'slate';
 
-import { AutomergeEditor } from "./automerge-editor";
+import { AutomergeEditor } from './automerge-editor';
 
-import { CursorData, CollabAction } from "@slate-collaborative/bridge";
-import { WithWebSocketSlateEditor } from "./withSocket";
+import { CursorData, CollabAction } from '@slate-collaborative/bridge';
+import { WithWebSocketSlateEditor } from './withSocket';
 
 export interface AutomergeOptions {
   docId: string;
