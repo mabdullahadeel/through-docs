@@ -54,7 +54,7 @@ const Client: React.FC<ClientProps> = ({ id, name }) => {
     const origin =
       process.env.NODE_ENV === 'production'
         ? window.location.origin
-        : 'http://localhost:8000';
+        : 'ws://localhost:8000';
 
     const options = {
       docId: '/' + docId,
