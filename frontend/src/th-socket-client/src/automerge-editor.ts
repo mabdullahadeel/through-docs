@@ -1,7 +1,7 @@
-import * as Automerge from "automerge";
+import Automerge from 'automerge';
 
-import { Editor, Operation } from "slate";
-import { HistoryEditor } from "slate-history";
+import { Editor, Operation } from 'slate';
+import { HistoryEditor } from 'slate-history';
 
 import {
   toJS,
@@ -12,7 +12,7 @@ import {
   setCursor,
   toSlateOp,
   CursorData,
-} from "@slate-collaborative/bridge";
+} from '@slate-collaborative/bridge';
 
 export interface AutomergeEditor extends Editor {
   clientId: string;
@@ -45,7 +45,7 @@ export const AutomergeEditor = {
    */
 
   createConnection: (e: AutomergeEditor, emit: (data: CollabAction) => void) =>
-    new Automerge.Connection(e.docSet, toCollabAction("operation", emit)),
+    new Automerge.Connection(e.docSet, toCollabAction('operation', emit)),
 
   /**
    * Apply Slate operations to Automerge
@@ -157,9 +157,7 @@ export const AutomergeEditor = {
   garbageCursor: (e: AutomergeEditor, docId: string) => {
     const doc = e.docSet.getDoc(docId);
 
-    if (!doc) {
-      return;
-    }
+    if (!doc) return;
 
     const changed = Automerge.change<SyncDoc>(doc, (d: any) => {
       delete d.cursors;

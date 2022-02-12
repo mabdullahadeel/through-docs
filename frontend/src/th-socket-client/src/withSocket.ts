@@ -1,5 +1,5 @@
-import { AutomergeEditor } from "./automerge-editor";
-import { CollabAction } from "@slate-collaborative/bridge";
+import { AutomergeEditor } from './automerge-editor';
+import { CollabAction } from '@slate-collaborative/bridge';
 
 export interface ThSlateSocketPluginOptions {
   url: string;
@@ -38,6 +38,8 @@ const withWebSocketSlateEditor = <T extends AutomergeEditor>(
          */
         editor.clientId = editor.socket?.url || Date.now().toString();
 
+        editor.openConnection();
+
         onConnect && onConnect();
       };
     }
@@ -47,7 +49,7 @@ const withWebSocketSlateEditor = <T extends AutomergeEditor>(
     };
 
     editor.socket.onerror = (_event) => {
-      onError && onError("Socket error");
+      onError && onError('Socket error');
     };
 
     editor.socket.onclose = (_event) => {
@@ -76,9 +78,9 @@ const withWebSocketSlateEditor = <T extends AutomergeEditor>(
 
   editor.receive = (msg: CollabAction) => {
     switch (msg.type) {
-      case "operation":
+      case 'operation':
         return editor.receiveOperation(msg.payload);
-      case "document":
+      case 'document':
         return editor.receiveDocument(msg.payload);
     }
   };

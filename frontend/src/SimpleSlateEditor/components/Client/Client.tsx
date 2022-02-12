@@ -57,7 +57,7 @@ const Client: React.FC<ClientProps> = ({ id, name }) => {
         : 'ws://localhost:8000';
 
     const options = {
-      docId: '/' + docId,
+      docId: docId,
       cursorData: {
         name,
         color,

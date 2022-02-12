@@ -13,10 +13,6 @@ export interface AutomergeOptions {
   preserveExternalHistory?: boolean;
 }
 
-/**
- * The `withAutomerge` plugin contains core collaboration logic.
- */
-
 const withAutomerge = <T extends Editor>(
   editor: T,
   options: AutomergeOptions
@@ -28,12 +24,12 @@ const withAutomerge = <T extends Editor>(
   const { docId, cursorData, preserveExternalHistory } = options || {};
 
   e.docSet = new Automerge.DocSet();
+  e.docSet.setDoc(docId, Automerge.init());
 
   const createConnection = () => {
     if (e.connection) e.connection.close();
 
     e.connection = AutomergeEditor.createConnection(e, (data: CollabAction) =>
-      //@ts-ignore
       e.send(data)
     );
 
